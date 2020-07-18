@@ -4,12 +4,13 @@ import FormElement from "../UI/Form/FormElement";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import Checkbox from "@material-ui/core/Checkbox";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
 
 class PlaceForm extends Component {
   state = {
     title: '',
     description: '',
-    titleImage: '',
+    image: '',
     images: [],
     reviews: [],
     checkbox: false,
@@ -66,7 +67,7 @@ class PlaceForm extends Component {
             <FormElement
               type="textarea"
               propertyName="description"
-              title="Recipe"
+              title="Description"
               onChange={this.inputChangeHandler}
               value={this.state.description}
               error={this.getFieldError('description')}
@@ -76,28 +77,29 @@ class PlaceForm extends Component {
           <Grid item xs>
             <FormElement
               type="file"
-              propertyName="titleImage"
+              propertyName="image"
               title="Main photo"
               onChange={this.fileChangeHandler}
-              error={this.getFieldError('titleImage')}
+              error={this.getFieldError('image')}
             />
           </Grid>
           <Grid item container xs justify="space-between">
             <Grid item xs={4}>
-              <Typography variant="p">By submitting this form, you agree that the following information will be submitted to the public domain, and administrators of this site will have full control over the said information.</Typography>
+              <Typography variant="body2">By submitting this form, you agree that the following information will be submitted to the public domain, and administrators of this site will have full control over the said information.</Typography>
             </Grid>
             <Grid item xs>
-              <Checkbox
-                label="I agree"
-                onClick={() => this.setState({checkbox: !this.state.checkbox})}
-                checked={false}
-                required
-                // value={this.state.checkbox}
-              />
+              <FormControlLabel control={
+                <Checkbox
+                  name="checkbox"
+                  onClick={() => this.setState({checkbox: !this.state.checkbox})}
+                  checked={this.state.checkbox}
+                  required
+                />
+              } label="I agree" />
             </Grid>
           </Grid>
           <Grid item xs>
-            <Button type="submit" color="primary" variant="contained">
+            <Button type="submit" color="primary" variant="contained" disabled={!this.state.checkbox}>
               Submit new place
             </Button>
           </Grid>

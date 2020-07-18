@@ -25,7 +25,7 @@ const PlaceItem = (props) => {
   const classes = useStyles();
   const dispatch = useDispatch();
 
-  const image = apiURL + "/" + props.titleImage;
+  const image = apiURL + "/" + props.image;
 
   return (
     <>
@@ -73,7 +73,7 @@ const PlaceItem = (props) => {
 };
 
 PlaceItem.propTypes = {
-  titleImage: PropTypes.string,
+  image: PropTypes.string,
   id: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   description: PropTypes.string,
