@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {registerUserRequest} from "../../store/actions/usersActions";
+import {registerUser} from "../../store/actions/usersActions";
 import {connect} from "react-redux";
 import FormElement from "../../components/UI/Form/FormElement";
 import Grid from "@material-ui/core/Grid";
@@ -21,7 +21,7 @@ class Register extends Component {
 
   submitFormHandler = event => {
     event.preventDefault();
-    this.props.registerUserRequest({...this.state});
+    this.props.registerUser({...this.state});
   };
 
   getFieldError = fieldName => {
@@ -81,12 +81,12 @@ class Register extends Component {
 }
 
 const mapStateToProps = state => ({
-  error: state.users.error,
-  loading: state.users.loading,
+  error: state.users.registerError,
+  loading: state.users.registerLoading,
 });
 
 const mapDispatchToProps = dispatch => ({
-  registerUserRequest: userData => dispatch(registerUserRequest(userData)),
+  registerUser: userData => dispatch(registerUser(userData)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Register);

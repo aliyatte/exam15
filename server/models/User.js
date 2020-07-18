@@ -10,7 +10,7 @@ const UserSchema = new Schema(
   {
     username: {
       type: String,
-      required: [true, 'Heобходимо заполнить'],
+      required: true,
       unique: true,
       validate: {
         validator: async function (value) {
@@ -22,7 +22,7 @@ const UserSchema = new Schema(
     },
     password: {
       type: String,
-      required: [true, 'Heобходимо заполнить'],
+      required: true,
     },
     token: {
       type: String,
@@ -44,7 +44,7 @@ const UserSchema = new Schema(
     }],
     images: [{
       type: Schema.Types.ObjectId,
-      ref: 'Image',
+      ref: 'Photo',
     }],
   },
   {

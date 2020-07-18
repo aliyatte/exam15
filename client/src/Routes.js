@@ -7,9 +7,9 @@ import Login from "./containers/Login/Login";
 // import NewProduct from "./containers/NewProduct/NewProduct";
 // import UserProfile from "./containers/UserProfile/UserProfile";
 
-const ProtectedRoute = ({isAllowed, ...props}) => (
-  isAllowed ? <Route {...props}/> : <Redirect to="/login"/>
-);
+// const ProtectedRoute = ({isAllowed, ...props}) => (
+//   isAllowed ? <Route {...props}/> : <Redirect to="/login"/>
+// );
 
 const Routes = () => {
   const user = useSelector(state => state.users.user);

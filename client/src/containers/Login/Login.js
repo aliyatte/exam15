@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import FormElement from "../../components/UI/Form/FormElement";
-import {loginUserRequest} from "../../store/actions/usersActions";
+import {loginUser} from "../../store/actions/usersActions";
 import {connect} from "react-redux";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
@@ -23,7 +23,7 @@ class Login extends Component {
   submitFormHandler = event => {
     event.preventDefault();
 
-    this.props.loginUserRequest({...this.state});
+    this.props.loginUser({...this.state});
   };
 
   render() {
@@ -39,7 +39,7 @@ class Login extends Component {
               <Grid container direction="column" spacing={2}>
                 {this.props.error && (
                   <Grid item xs>
-                    <Alert severity="error">{this.props.error.error || this.props.error.global}</Alert>
+                    <Alert severity="error">{this.props.error.error}</Alert>
                   </Grid>
                 )}
 
@@ -81,12 +81,12 @@ class Login extends Component {
 }
 
 const mapStateToProps = state => ({
-  loading: state.users.loading,
-  error: state.users.error,
+  loading: state.users.loginLoading,
+  error: state.users.loginError,
 });
 
 const mapDispatchToProps = dispatch => ({
-  loginUserRequest: userData => dispatch(loginUserRequest(userData)),
+  loginUser: userData => dispatch(loginUser(userData)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);
