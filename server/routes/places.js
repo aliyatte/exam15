@@ -11,7 +11,7 @@ const router = express.Router();
 
 router.get('/', async (req, res) => {
   try {
-    const places = await Place.find().sort({createdAt: -1}).limit(50).populate('createdBy');
+    const places = await Place.find().sort({createdAt: -1}).limit(50).populate('user');
     return res.send(places);
   } catch (error) {
     return res.status(500).send(error);
@@ -38,7 +38,7 @@ router.post('/', auth, upload.single("image"), async (req, res) => {
     const place = new Place(req.body);
 
     if (req.file) {
-      place.titleImage = req.file.filename;
+      place.image = req.file.filename;
     }
 
     await place.save();

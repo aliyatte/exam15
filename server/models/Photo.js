@@ -8,7 +8,7 @@ const PhotoSchema = new Schema(
       type: String,
       required: true,
     },
-    createdBy: {
+    user: {
       type: Schema.Types.ObjectId,
       ref: 'User',
       required: true,
