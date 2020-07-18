@@ -3,6 +3,7 @@ const ValidationError = require('mongoose').Error.ValidationError;
 
 const auth = require('../middleware/auth');
 const permit = require('../middleware/permit');
+const upload = require('../multer').uploads;
 
 const Place = require('../models/Place');
 
@@ -31,10 +32,14 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-router.post('/', auth, async (req, res) => {
+router.post('/', auth, upload.single("image"), async (req, res) => {
   try {
     req.body.user = req.user._id;
     const place = new Place(req.body);
+
+    if (req.file) {
+      place.titleImage = req.file.filename;
+    }
 
     await place.save();
     return res.send({id: place._id});
